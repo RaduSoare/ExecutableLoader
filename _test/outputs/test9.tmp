@@ -1,5 +1,0 @@
-_test/outputs/test9.out vs _test/refs/test9.ref:
---- _test/outputs/test9.out	2021-04-22 16:40:11.373530394 +0300
-+++ _test/refs/test9.ref	2021-03-09 11:54:04.682012517 +0200
-@@ -0,0 +1 @@
-+0x605c7ecf
