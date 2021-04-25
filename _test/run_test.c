@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 		fault_count_fname = argv[2];
 	else
 		fault_count_fname = "fault_cnt.out";
-	
+
 	so_init_loader();
 
 	memset(&sa, 0, sizeof(sa));

@@ -1,0 +1,24 @@
+Tema3 SO
+Soare Radu
+336CB
+
+Idee generala:
+
+    Am creat un nou handler pentru semnalul de SIGSEGV si l-am retinut
+pe cel vechi intr-o alta structura, dat ca parametru functiei sigaction().
+    In handler am obtinut adresa de la care a venit page fault-ul, apoi
+am iterat prin fiecare segment pentru a vedea daca adresa se afla intr-un
+segment cunoscut. Daca era in afara segmentelor, se folosea handlerul default.
+    Daca page fault-ul venea dintr-un segment cunoscut, verificam daca
+este mapat sau nu cu ajutorul campului data din segment. Am alocat
+acest camp ca un array de int de nr_pagini elemente, pentru a retine
+daca o pagina este mapata (valoarea=1) sau nu (valoarea=0).
+    Daca o pagina era deja marcata ca mapata, insemna ca page fault-ul
+a venit din lipsa de permisiuni asa ca rulam handlerul default. Altfel,
+daca pagina nu era mapata, o alocam cu ajutorul mmap.
+    Dupa ce maparea reusea, verific cele 3 cazuri in care se poate afla
+o pagina in relatie cu zona dintre [file_size, mem_size] si anume:
+pagina se afla doar cu a doua parte in zona, se afla cu totul in zona sau 
+se afla doar cu prima parte in zona.
+    Dupa ce zeroizez portiunea corespunzatoare din pagina, marchez
+pagina ca mapata in data.
